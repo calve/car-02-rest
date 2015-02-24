@@ -33,6 +33,8 @@ public class RestBridge {
          */
         public void handle(HttpExchange t) throws IOException {
             String response = "This is the response for "+t.getRequestURI();
+            /* Log this request on the server */
+            System.out.println(t.getRequestMethod() + ": "+t.getRequestURI());
             t.sendResponseHeaders(200, response.length());
             OutputStream os = t.getResponseBody();
             os.write(response.getBytes());
