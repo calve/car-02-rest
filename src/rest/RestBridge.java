@@ -29,7 +29,7 @@ public class RestBridge {
 
         /* Handles one HttpExchange.
          * Should instanciate a FtpClient using the RequestURI as parameters,
-         * and returns the response of that FtpClient
+         * and output the response of that FtpClient
          */
         public void handle(HttpExchange t) throws IOException {
             String response = "This is the response for "+t.getRequestURI();
