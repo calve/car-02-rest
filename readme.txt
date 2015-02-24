@@ -9,7 +9,7 @@ Architecture
                 |       REST Bridge           |
                 |                             |
 +-----------+   +--------------++-------------+  +----------+
-|HTTP Client|   | HTTP Serveur || FTP Client  |  |FTP Server|
+|HTTPBrowser|   | HTTP Serveur || FTP Client  |  |FTP Server|
 +-----------+   +--------------++-------------+  +----------+
      |  GET path/to/r  |               |             |
      |---------------->|               |             |
