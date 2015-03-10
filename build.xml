@@ -3,6 +3,13 @@
   <property name="src.dir" value="src" />
   <property name="build.sysclasspath" value="last" />
   <property name="tst-dir" location="test" />
+  <property name="lib-dir" location="classes" />
+
+  <path id="classpath">
+    <fileset dir="lib">
+      <include name="*.jar" />
+    </fileset>
+  </path>
 
   <target name="clean">
     <delete dir="classes" />
@@ -12,6 +19,7 @@
   <target name="compile">
     <mkdir dir="classes" />
     <javac srcdir="src" destdir="classes">
+      <classpath refid="classpath"/>
     </javac>
   </target>
 
@@ -38,6 +46,7 @@
 
   <target name="run" depends="compile">
     <java classname="rest.RestBridge" fork="true">
+      <classpath refid="classpath"/>
       <arg value="127.0.0.1"/>  <!-- FTP server ip -->
       <arg value="2121"/>       <!-- FTP server port -->
       <arg value="anonymous"/>  <!-- FTP server user -->
