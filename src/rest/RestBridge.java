@@ -70,20 +70,25 @@ public class RestBridge {
             String uri = ""+t.getRequestURI(); /* Bizarre : fails to compile without the empty string */
             FtpClient ftpClient = new FtpClient(this.ip, this.port, this.user, this.password);
 
-            String response = String.format("This is the response for %s (%s)", uri, httpVerb);
-            switch (httpVerb){
-            case "GET":
-                response = ftpClient.get(uri).toString();
-                break;
-            case "POST":
-                response = ftpClient.post(uri, "".getBytes()).toString();
-                break;
+            byte[] response = String.format("This is the response for %s (%s)", uri, httpVerb).getBytes();
+            try {
+                switch (httpVerb){
+                case "GET":
+                    response = ftpClient.get(uri);
+                    break;
+                case "POST":
+                    response = ftpClient.post(uri, "".getBytes());
+                    break;
+                }
+            }
+            catch (IOException e) {
+                response = "something failed".getBytes();
             }
             /* Log this request on the server */
             System.out.println(httpVerb + ": "+uri);
-            t.sendResponseHeaders(200, response.length());
+            t.sendResponseHeaders(200, response.length);
             OutputStream os = t.getResponseBody();
-            os.write(response.getBytes());
+            os.write(response);
             os.close();
         }
     }
