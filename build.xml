@@ -38,6 +38,9 @@
 
   <target name="run" depends="compile">
     <java classname="rest.RestBridge" fork="true">
+      <arg value="127.0.0.1"/>  <!-- FTP server ip -->
+      <arg value="2121"/>       <!-- FTP server port -->
+      <arg value="anonymous"/>  <!-- FTP server user -->
     </java>
   </target>
 
