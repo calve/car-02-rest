@@ -16,6 +16,7 @@ public class RestBridge {
 
     public static void main(String[] args) throws Exception {
         System.out.println("I am a rest bridge, which unfortunately does nothing yet");
+        System.out.println("Listening on "+LISTENING_PORT);
         HttpServer server = HttpServer.create(new InetSocketAddress(LISTENING_PORT), 0);
         server.createContext("/", new FtpHandler());
         server.setExecutor(null);
