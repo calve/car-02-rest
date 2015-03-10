@@ -1,3 +1,5 @@
+package rest;
+
 public class FtpClient {
     /** Connects to the FTP serveur located at ip:port,
      * using (user, password) as credentials
@@ -18,7 +20,7 @@ public class FtpClient {
 
     /* Post ``data`` at ``path``
      */
-    byte[] post(String path, byte data){
+    byte[] post(String path, byte[] data){
         return "".getBytes();
     }
 }
