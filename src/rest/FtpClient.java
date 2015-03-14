@@ -2,6 +2,7 @@ package rest;
 
 import java.io.IOException;
 import java.net.SocketException;
+import java.io.ByteArrayOutputStream;
 
 import org.apache.commons.net.ftp.FTPFile;
 
@@ -49,10 +50,10 @@ public class FtpClient {
             return output.getBytes();
         }
         else {
-            System.out.println("not a dir");
-            /* Here we should RECV */
+            ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+            boolean completed = this.ftp.retrieveFile(path, outputStream);
+            return outputStream.toByteArray();
         }
-        return "".getBytes();
     }
 
     /* Post ``data`` at ``path``
