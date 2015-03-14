@@ -80,13 +80,14 @@ public class RestBridge {
                     response = ftpClient.post(uri, "".getBytes());
                     break;
                 }
+                t.sendResponseHeaders(200, response.length);
             }
             catch (IOException e) {
-                response = "something failed".getBytes();
+                t.sendResponseHeaders(500, response.length);
+                response = "Internal error. Maybe the REST bridge is not connected to an FTP server ?".getBytes();
             }
             /* Log this request on the server */
             System.out.println(httpVerb + ": "+uri);
-            t.sendResponseHeaders(200, response.length);
             OutputStream os = t.getResponseBody();
             os.write(response);
             os.close();

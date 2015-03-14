@@ -28,11 +28,11 @@ public class FtpClient {
         }
         try {
             this.ftp.login(user, password);
+            System.out.println("Successfully logged in");
         }
         catch (IOException e){
             System.out.println("Failed to log to ftp server");
         }
-        System.out.println("Successfully logged in");
     }
 
     /* Retrieve the content of ``path``
