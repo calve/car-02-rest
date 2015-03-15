@@ -1,8 +1,9 @@
 package rest;
 
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.net.SocketException;
-import java.io.ByteArrayOutputStream;
 
 import org.apache.commons.net.ftp.FTPFile;
 
@@ -58,7 +59,35 @@ public class FtpClient {
 
     /* Post ``data`` at ``path``
      */
-    byte[] post(String path, byte[] data){
-        return "".getBytes();
+    /**
+     * Create the file 'path' containing the data 'data'
+     * @param path The name of the new file
+     * @param data The file's datas
+     * @return True if the file was created, False otherwise
+     */
+    public byte[] post(String path, byte[] data){
+		boolean status = false;
+		ByteArrayInputStream dataStream = new ByteArrayInputStream(data);
+		try {
+			status = this.ftp.storeFile(path, dataStream);
+		} catch (IOException e) {
+			System.out.println("Failed to post to ftp server");
+		}
+		return "".getBytes();
+    }
+
+    /**
+     * Delete the file or directory 'path'
+     * @param path The file or directory to delete
+     * @return True if the file or directory was deleted, False otherwise
+     */
+    public byte[] delete(String path){
+		boolean status = false;
+		try {
+			status = this.ftp.deleteFile(path);
+		} catch (IOException e) {
+			System.out.println("Failed to delete the file from the server");
+		}
+		return "".getBytes();
     }
 }

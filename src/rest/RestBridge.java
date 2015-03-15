@@ -79,6 +79,9 @@ public class RestBridge {
                 case "POST":
                     response = ftpClient.post(uri, "".getBytes());
                     break;
+                case "DELETE":
+					response = ftpClient.delete(uri);
+					break;
                 }
                 t.sendResponseHeaders(200, response.length);
             }
