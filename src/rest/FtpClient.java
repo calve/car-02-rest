@@ -3,6 +3,7 @@ package rest;
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.net.SocketException;
 
 import org.apache.commons.net.ftp.FTPFile;
@@ -65,11 +66,10 @@ public class FtpClient {
      * @param data The file's datas
      * @return True if the file was created, False otherwise
      */
-    public byte[] post(String path, byte[] data){
+    public byte[] post(String path, InputStream data){
 		boolean status = false;
-		ByteArrayInputStream dataStream = new ByteArrayInputStream(data);
 		try {
-			status = this.ftp.storeFile(path, dataStream);
+			status = this.ftp.storeFile(path, data);
 		} catch (IOException e) {
 			System.out.println("Failed to post to ftp server");
 		}
