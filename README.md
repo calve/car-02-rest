@@ -62,6 +62,11 @@ Now type a dump password, like ``plopplop``. Then the bridge tells you on which 
 Open ``127.0.0.1:8080`` in your browser to list files under your ftp server.
 
 
+Tests
+-----
+
+     ./test.sh
+
 Todo
 ----
 
@@ -69,3 +74,4 @@ An ``FtpClient`` class with the following methods :
 
   + ``bytes post(String path, bytes data)`` which create the file ``path`` with the data ``data``
   + Find a good name for this restbridge
+
