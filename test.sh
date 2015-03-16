@@ -6,27 +6,31 @@ function request(){
     echo $verbe $ressource
     if [ -n "$3" ]; then
         # extra data as third argument !
-        curl -X $verbe --data-binary "$3" $BASEURL$ressource
+        echo "data : " $3
+        curl -X $verbe --data-ascii "$3" $BASEURL$ressource
     else
         curl -X $verbe $BASEURL$ressource
     fi
+    sleep 1
+    echo
 }
 
-git clone http://github.com/calve/prof tmp
+mkdir -p tmp
 cd tmp
 python -m pyftpdlib -w &
+git clone http://github.com/calve/prof .
 sleep 3
 request "GET" "/"
 request "GET" "/run.py"
-request "GET" "/src/"
+request "GET" "/legacy/"
 request "DELETE" "/run.py"
 
 echo "Should return 404"
 request "GET" "/run.py"
 
-request "POST" "/post_form_brigde.py" "hello, brigde"
-request "GET" "/post_form_bridge.py"
-request "DELETE" "/post_form_bridge.py"
+request "POST" "/helloworld" "hello, brigde"
+request "GET" "/helloworld"
+request "DELETE" "/helloworld"
 
 cd ..
 rm -Rvf tmp > /dev/null

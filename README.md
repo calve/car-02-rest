@@ -65,7 +65,9 @@ Open ``127.0.0.1:8080`` in your browser to list files under your ftp server.
 Tests
 -----
 
-     ./test.sh
+    ./test.sh
+
+Will start the ftp server, and do some POST, GET and DELETE
 
 Todo
 ----
