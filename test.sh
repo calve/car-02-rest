@@ -28,6 +28,8 @@ request "DELETE" "/run.py"
 echo "Should return 404"
 request "GET" "/run.py"
 
+request "POST" "/subfolder/" ""
+request "GET" "/"
 request "POST" "/helloworld" "hello, brigde"
 request "GET" "/helloworld"
 request "DELETE" "/helloworld"

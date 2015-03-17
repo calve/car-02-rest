@@ -42,7 +42,7 @@ public class FtpClient {
      */
     byte[] get(String path) throws IOException{
         System.out.println(path);
-        if (path.substring(path.length() - 1).charAt(0) == '/'){
+        if (this.isDir(path)){
             /* List the directory ! */
             FTPFile[] files = this.ftp.listFiles(path);
             String output = "";
@@ -69,7 +69,12 @@ public class FtpClient {
     public byte[] post(String path, InputStream data){
 		boolean status = false;
 		try {
-			status = this.ftp.storeFile(path, data);
+                    if (this.isDir(path)){
+                        status = this.ftp.makeDirectory(path);
+                    }
+                    else {
+                        status = this.ftp.storeFile(path, data);
+                    }
 		} catch (IOException e) {
 			System.out.println("Failed to post to ftp server");
 		}
@@ -89,5 +94,9 @@ public class FtpClient {
 			System.out.println("Failed to delete the file from the server");
 		}
 		return "".getBytes();
+    }
+
+    private boolean isDir(String path){
+        return path.substring(path.length() - 1).charAt(0) == '/';
     }
 }
