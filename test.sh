@@ -7,9 +7,9 @@ function request(){
     if [ -n "$3" ]; then
         # extra data as third argument !
         echo "data : " $3
-        curl -X $verbe --data-ascii "$3" $BASEURL$ressource
+        http_proxy="" curl -X $verbe --data-ascii "$3" $BASEURL$ressource
     else
-        curl -X $verbe $BASEURL$ressource
+        http_proxy="" curl -X $verbe $BASEURL$ressource
     fi
     sleep 1
     echo
